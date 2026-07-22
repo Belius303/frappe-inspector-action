@@ -1,0 +1,57 @@
+name: Frappe Inspector
+description: Fail unsafe Frappe and ERPNext schema migrations before they reach production.
+author: Mohamed Tazi Hnyine
+branding:
+  icon: search
+  color: green
+inputs:
+  path:
+    description: Frappe bench or app path relative to the repository root.
+    required: false
+    default: .
+  mode:
+    description: Use scan for Community static checks or migration for Universal Pro schema comparison.
+    required: false
+    default: migration
+  base-ref:
+    description: Git ref used as the migration baseline.
+    required: false
+  fail-on:
+    description: Minimum finding severity that fails the job (note, warning, or error).
+    required: false
+    default: error
+  include-safe:
+    description: Include safe additions in the migration report.
+    required: false
+    default: "false"
+  license-key:
+    description: Universal Pro license key. Pass this from a GitHub encrypted secret.
+    required: false
+  markdown-file:
+    description: Markdown report path.
+    required: false
+    default: frappe-inspector.md
+  json-file:
+    description: Universal Pro JSON report path.
+    required: false
+    default: frappe-inspector.json
+  sarif-file:
+    description: Universal Pro SARIF report path.
+    required: false
+    default: frappe-inspector.sarif
+outputs:
+  errors:
+    description: Number of error findings.
+  warnings:
+    description: Number of warning findings.
+  risky:
+    description: Number of risky migration changes.
+  needs-review:
+    description: Number of migration changes requiring review.
+  sarif-file:
+    description: Generated SARIF path.
+  json-file:
+    description: Generated JSON path.
+runs:
+  using: node24
+  main: dist/index.cjs
