@@ -25,7 +25,7 @@ inputs:
     required: false
     default: "false"
   license-key:
-    description: Universal Pro license key. Pass this from a GitHub encrypted secret.
+    description: FI-PRO Universal Pro license key. Pass this from a GitHub encrypted secret.
     required: false
   markdown-file:
     description: Markdown report path.
