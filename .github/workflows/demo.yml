@@ -1,6 +1,13 @@
 name: Frappe Inspector Demo
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "demo/**"
+      - "dist/**"
+      - "action.yml"
+      - ".github/workflows/demo.yml"
   pull_request:
     paths:
       - "demo/**"
