@@ -7,7 +7,7 @@
 
 Frappe Inspector adds framework-aware static analysis to pull requests. It understands DocType schemas and related Python, JavaScript, hooks, patches, Custom Fields, Property Setters, whitelisted endpoints, permission guards and unsafe migrations without executing project code.
 
-On the controlled Frappe-specific benchmark, Frappe Inspector 1.3.1 detects 16/16 expected findings with 0 false positives. Bandit 1.9.4 detects 2/16 with 1 false positive, and Semgrep 1.172.0 detects 1/16 with 0 false positives. This is a controlled Frappe benchmark, not a global claim over every static analyzer.
+On the 22-case controlled Frappe-specific benchmark, Frappe Inspector 1.3.2 detects all 20 expected findings with 0 false positives, including 3 migration-only findings. On the 17-finding generic subset, Bandit 1.9.4 detects 2 with 3 false positives, and Semgrep 1.172.0 detects 1 with 0 false positives. This is a controlled Frappe benchmark, not a global claim over every static analyzer.
 
 ## What it catches
 

@@ -1,0 +1,9 @@
+{
+  "doctype": "DocType",
+  "name": "Customer",
+  "module": "Demo",
+  "fields": [
+    { "fieldname": "customer_name", "fieldtype": "Data" }
+  ],
+  "permissions": []
+}

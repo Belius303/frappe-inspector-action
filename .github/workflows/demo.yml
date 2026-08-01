@@ -1,0 +1,49 @@
+name: Frappe Inspector Demo
+
+on:
+  pull_request:
+    paths:
+      - "demo/**"
+      - "dist/**"
+      - "action.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  frappe-inspector:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan Frappe demo fixture
+        id: inspector
+        continue-on-error: true
+        uses: ./
+        with:
+          mode: scan
+          path: demo/frappe-bench
+          fail-on: error
+          license-key: ${{ secrets.FRAPPE_INSPECTOR_LICENSE_KEY }}
+
+      - name: Upload SARIF when Universal Pro is configured
+        if: always() && hashFiles('frappe-inspector.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: frappe-inspector.sarif
+
+      - name: Upload Markdown evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frappe-inspector-demo-report
+          path: frappe-inspector.md
+
+      - name: Keep the intentional vulnerable fixture demo green
+        if: always()
+        shell: bash
+        run: |
+          echo "The demo fixture intentionally contains Frappe security findings."
+          echo "Action outcome: ${{ steps.inspector.outcome }}"
