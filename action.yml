@@ -1,5 +1,5 @@
 name: Frappe Inspector
-description: Fail unsafe Frappe and ERPNext schema migrations before they reach production.
+description: Frappe-aware security analysis, SARIF and migration safety for ERPNext pull requests.
 author: Mohamed Tazi Hnyine
 branding:
   icon: search
