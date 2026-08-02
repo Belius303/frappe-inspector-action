@@ -24,6 +24,23 @@ inputs:
     description: Include safe additions in the migration report.
     required: false
     default: "false"
+  new-only:
+    description: Universal Pro. Report only static findings not present at the baseline ref.
+    required: false
+    default: "false"
+  pr-comment:
+    description: Universal Pro. Upsert a bounded pull request comment with the report summary.
+    required: false
+    default: "false"
+  github-token:
+    description: GitHub token used only when pr-comment is enabled.
+    required: false
+  policy-file:
+    description: Universal Pro JSON policy path relative to the repository root.
+    required: false
+  suppressions-file:
+    description: Universal Pro JSON suppressions path relative to the repository root.
+    required: false
   license-key:
     description: FI-PRO Universal Pro license key. Pass this from a GitHub encrypted secret.
     required: false
@@ -39,6 +56,15 @@ inputs:
     description: Universal Pro SARIF report path.
     required: false
     default: frappe-inspector.sarif
+  html-file:
+    description: Optional Universal Pro HTML report path. Disabled when empty.
+    required: false
+  audit-file:
+    description: Optional Universal Pro JSON audit report path. Disabled when empty.
+    required: false
+  migration-plan-file:
+    description: Optional Universal Pro JSON migration plan path. Disabled when empty.
+    required: false
 outputs:
   errors:
     description: Number of error findings.
@@ -52,6 +78,12 @@ outputs:
     description: Generated SARIF path.
   json-file:
     description: Generated JSON path.
+  html-file:
+    description: Generated HTML path, or empty when disabled.
+  audit-file:
+    description: Generated audit JSON path, or empty when disabled.
+  migration-plan-file:
+    description: Generated migration plan path, or empty when disabled.
 runs:
   using: node24
   main: dist/index.cjs
